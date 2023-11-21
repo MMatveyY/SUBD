@@ -1,3 +1,6 @@
+// https://github.com/MMatveyY/SUBD/pull/1
+
+
 #include <iostream>
 #include <sstream>
 
@@ -39,19 +42,15 @@ size_t GetSize(const std::string &message);
  * @param start начальная позиция.
  * @return индекс наименьшего числа.
  */
-int FindSmallestPosition(int *array, int start, const size_t size_);
+size_t findSmallestPosition(const int *array, const size_t start, const size_t size_);
 
 int main() {
 
   try {
-    size_t sizeArr;
+    auto size = GetSize("Input size array: ");
 
-    sizeArr = GetSize("Input size array: ");
 
-    size_t size = sizeArr;
-    int *NewArray = nullptr;
-
-    NewArray = InputArray(size);
+    auto NewArray = InputArray(size);
 
     cout << ToString(NewArray, size);
 
@@ -81,9 +80,7 @@ size_t GetSize(const std::string &message) {
     throw std::out_of_range(
         "Incorrect size. Value has to be greater or equal zero.");
   }
-  size_t newSize = static_cast<size_t>(size);
-
-  return newSize;
+  return static_cast<size_t>(size);
 }
 
 int *InputArray(const size_t size_) {
@@ -110,10 +107,16 @@ string ToString(const int *array, const size_t size_) {
   return buffer.str();
 }
 
-int findSmallestPosition(int *array, int start, const size_t size_)
+size_t findSmallestPosition(const int *array, const size_t start, const size_t size_)
 {
-  size_t smallestPosition = static_cast<size_t>(start);
-  for(int i = start; i < size_; i++)
+
+  if (start <0){
+    throw std::out_of_range("Incorrect start position. Value has to be greater.");
+  }
+  
+  auto smallestPosition = static_cast<size_t>(start);
+  
+  for(size_t i = start; i < size_; i++)
   {
     if(array[i] < array[smallestPosition])
       smallestPosition = i;
@@ -122,9 +125,9 @@ int findSmallestPosition(int *array, int start, const size_t size_)
 }
 
 int Sorting(int *array, const size_t size_) {	
-  for(int i = 0; i < size_; i++)
+  for(size_t i = 0; i < size_; i++)
   {
-    int smallestPosition = findSmallestPosition(array, i, size_);
+    auto smallestPosition = findSmallestPosition(array, i, size_);
     swap(array[i], array[smallestPosition]);
   }
   return *array;
