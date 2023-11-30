@@ -1,6 +1,3 @@
-// https://github.com/MMatveyY/SUBD/pull/1
-
-
 #include <iostream>
 #include <sstream>
 
@@ -26,7 +23,7 @@ string ToString(const int *array, const size_t size_);
  * @param size_ размер массива.
  * @return отсортированный массив.
  */
-int Sorting(int *array, const size_t size_);
+int *Sorting(int *array, const size_t size_);
 
 /**
  * @brief ввод и проверка на корректное число элементов массива.
@@ -42,13 +39,13 @@ size_t GetSize(const std::string &message);
  * @param start начальная позиция.
  * @return индекс наименьшего числа.
  */
-size_t findSmallestPosition(const int *array, const size_t start, const size_t size_);
+size_t findSmallestPosition(const int *array, const size_t start,
+                            const size_t size_);
 
 int main() {
 
   try {
     auto size = GetSize("Input size array: ");
-
 
     auto NewArray = InputArray(size);
 
@@ -107,28 +104,27 @@ string ToString(const int *array, const size_t size_) {
   return buffer.str();
 }
 
-size_t findSmallestPosition(const int *array, const size_t start, const size_t size_)
-{
+size_t findSmallestPosition(const int *array, const size_t start,
+                            const size_t size_) {
 
-  if (start <0){
-    throw std::out_of_range("Incorrect start position. Value has to be greater.");
+  if (start < 0) {
+    throw std::out_of_range(
+        "Incorrect start position. Value has to be greater.");
   }
-  
-  auto smallestPosition = static_cast<size_t>(start);
-  
-  for(size_t i = start; i < size_; i++)
-  {
-    if(array[i] < array[smallestPosition])
+
+  size_t smallestPosition = start;
+
+  for (size_t i = start; i < size_; i++) {
+    if (array[i] < array[smallestPosition])
       smallestPosition = i;
   }
   return smallestPosition;
 }
 
-int Sorting(int *array, const size_t size_) {	
-  for(size_t i = 0; i < size_; i++)
-  {
+int *Sorting(int *array, const size_t size_) {
+  for (size_t i = 0; i < size_; i++) {
     auto smallestPosition = findSmallestPosition(array, i, size_);
     swap(array[i], array[smallestPosition]);
   }
-  return *array;
+  return array;
 }
