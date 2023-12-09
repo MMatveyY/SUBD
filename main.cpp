@@ -23,7 +23,7 @@ string ToString(const int *array, const size_t size_);
  * @param size_ размер массива.
  * @return отсортированный массив.
  */
-int *Sorting(int *array, const size_t size_);
+void Sorting(int *array, const size_t size_);
 
 /**
  * @brief ввод и проверка на корректное число элементов массива.
@@ -39,8 +39,7 @@ size_t GetSize(const std::string &message);
  * @param start начальная позиция.
  * @return индекс наименьшего числа.
  */
-size_t findSmallestPosition(const int *array, const size_t start,
-                            const size_t size_);
+size_t findSmallestPosition(const int *array, const size_t start,                                       const size_t size_);
 
 int main() {
 
@@ -121,10 +120,9 @@ size_t findSmallestPosition(const int *array, const size_t start,
   return smallestPosition;
 }
 
-int *Sorting(int *array, const size_t size_) {
+void Sorting(int *array, const size_t size_) {
   for (size_t i = 0; i < size_; i++) {
     auto smallestPosition = findSmallestPosition(array, i, size_);
     swap(array[i], array[smallestPosition]);
   }
-  return array;
 }
