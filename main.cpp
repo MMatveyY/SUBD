@@ -58,7 +58,10 @@ int main() {
       delete[] NewArray;
       NewArray = nullptr;
     }
-
+  } catch (const std::out_of_range &e) {
+    std::cout << "Ошибка: " << e.what() << std::endl;
+    return 1;
+    
   } catch (const std::invalid_argument &e) {
     std::cout << "Ошибка: " << e.what() << std::endl;
     return 1;
